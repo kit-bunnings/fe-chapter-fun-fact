@@ -1,6 +1,6 @@
 /*!
-* reveal.js 4.2.0
-* https://revealjs.com
+* reveal.js undefined
+* https://kit-bunnings.github.io/fe-chapter-fun-fact/
 * MIT licensed
 *
 * Copyright (C) 2011-2021 Hakim El Hattab, https://hakim.se
