@@ -5,6 +5,7 @@
     "test": "gulp test",
     "start": "gulp serve",
     "build": "gulp build",
+    "predeploy": "npm run build",
     "deploy": "gh-pages -d ."
   },
   "engines": {

@@ -2,6 +2,8 @@
 
 Built using https://revealjs.com/
 
+Published at https://kit-bunnings.github.io/fe-chapter-fun-fact/index.html
+
 ## Develop
 
 ```bash
