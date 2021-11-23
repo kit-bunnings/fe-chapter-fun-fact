@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>FUN FACT</title>
+
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/black.css" />
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+
+    <style>
+      :root {
+        --r-heading-text-transform: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <h1 class="r-fit-text">FUN FACT</h1>
+          <h2>FE Chapter</h2>
+          <h3 style="font-size: 0.5em">November 30, 2021</h3>
+          <h4 style="font-size: 0.5em">Kit Foster</h4>
+          <p style="font-size: 0.5em">Content source: <a href="https://hacks.mozilla.org/2015/04/es6-in-depth-iterators-and-the-for-of-loop/">ES6 In Depth: Iterators and the for-of loop by Jason Orendorff</a></p>
+        </section>
+        <section>
+          <h1>JS FOR LOOPS</h1>
+          🔁
+        </section>
+        <section>
+          <h1>The original</h1>
+
+            <span>
+              Bit clunky 💁‍♀️
+            </span>
+          <pre>
+            <code data-trim data-noescape>
+              const myArray = ["hello", "world"];
+              
+              for (var index = 0; index < myArray.length; index++) {
+                console.log(myArray[index]);
+              }
+            </code>
+          </pre>
+        </section>
+        <section>
+          <h2>.forEach</h2>
+          <span>ES5</span>
+          <div
+            style="
+              font-size: 0.5em;
+              width: 80%;
+              margin: 0 auto;
+            "
+          >
+            <p>
+              This is a little shorter, but there is one minor drawback: you
+              can’t break out of this loop using a break statement or return
+              from the enclosing function using a return statement 🙄
+            </p>
+          </div>
+          <pre>
+            <code data-trim data-noescape>
+              const myArray = ["hello", "world"];
+              
+              myArray.forEach((elem) => {
+                console.log(elem);
+              });				  
+            </code>
+          </pre>
+          <div class="fragment">
+            <p style="font-size: 0.5em">Supports index</p>
+            <pre>
+              <code data-trim data-noescape>
+                const myArray = ["hello", "world"];
+                
+                myArray.forEach((elem, index) => {
+                  console.log(elem, index);
+                });				  
+              </code>
+            </pre>
+          </div>
+        </section>
+        <section>
+          <h2>for-in loop ❌</h2>
+          <span>ES5</span>
+          <pre>
+            <code data-trim data-noescape>
+              const myArray = ["hello", "world"];
+              
+              for (var index in myArray) {    // don't actually do this
+                console.log(myArray[index]);
+              } 
+          </code>
+        </pre>
+          <div
+            class="fragment"
+            style="
+              font-size: 0.5em;
+              width: 80%;
+              margin: 0 auto;
+              text-align: left;
+            "
+          >
+            <p>
+              This is bad for several reasons
+              <ol>
+                <li class="fragment">
+                  The values assigned to
+                  index in this code are the strings "0", "1", "2" and so on, not
+                  actual numbers. Since you probably don’t want string arithmetic
+                  ("2" + 1 == "21"), this is inconvenient at best.
+                </li>
+              </br>
+              <li class="fragment">
+                The loop body
+                will execute not only for array elements, but also for any other
+                expando properties someone may have added. For example, if your
+                array has an enumerable property myArray.name, then this loop will
+                execute one extra time, with index == "name". Even properties on
+                the array’s prototype chain can be visited.
+              </li>
+            </br>
+                <li class="fragment">
+                  In some circumstances, this code can loop over the array
+                  elements in an arbitrary order 😱
+                </li>
+              </ol>  
+            </p>
+          </div>
+        </section>
+        <section>
+          <h2>for-of loop ✅</h2>
+          <span>ES6</span>
+          <div
+            style="
+              font-size: 0.5em;
+              width: 80%;
+              margin: 0 auto;
+              text-align: left;
+            "
+          >
+            <p>
+              <ol>
+                <li>
+                  This is the most concise, direct syntax yet for looping through array elements
+                </li>
+                <li>
+                  It avoids all the pitfalls of for–in
+                </li>
+                <li>
+                  Unlike forEach(), it works with break, continue, and return
+                </li>
+              </ol>  
+            </p>
+          </div>
+          <pre>
+            <code data-trim data-noescape>
+              const myArray = ["hello", "world"];
+              
+              for (const value of myArray) {
+                console.log(value);
+              }
+            </code>
+          </pre>
+          <div class="fragment">
+            <p style="font-size: 0.5em">Supports index</p>
+            <pre>
+              <code data-trim data-noescape>
+                const myArray = ["hello", "world"];
+                
+                for (const (value, index) of myArray) {
+                  console.log(value, index);
+                }
+              </code>
+            </pre>
+          </div>
+          <div class="fragment">
+            <p style="font-size: 0.5em">Supports string, Map & Set</p>
+            <pre>
+              <code data-trim data-noescape>
+                for (const chr of "😺😲") {
+                  console.log(chr);
+                }
+              </code>
+            </pre>
+          </div>
+        </section>
+        <section>
+          <h1>async / await with for loops</h1>
+        </section>
+        <section>
+          <h2>.forEach ❌</h2>
+          <div>
+            <div
+            style="
+              font-size: 0.5em;
+              width: 80%;
+              margin: 0 auto;
+              "
+              >
+              <p>
+                Fires off all promises at once, does not wait for them to finish
+              </p>
+            </div>
+            <img src="assets/foreach.gif" style="height: 40vh;">
+          </div>
+          </section>
+          <section>
+          <div>
+            <span>for-of loop ✅</span>
+            <div
+            style="
+              font-size: 0.5em;
+              width: 80%;
+              margin: 0 auto;
+              "
+              >
+              <p>
+                Waits for promises to finish before moving on
+              </p>
+            </div>
+            <img src="assets/for-of.gif" style="height: 40vh;">
+          </div>
+        </section>
+        <section>
+          <h1>Use for-of 👍</h1>
+          <pre>
+            <code data-trim data-noescape>
+              const myArray = ["hello", "world"];
+              
+              for (const value of myArray) {
+                console.log(value);
+              }
+            </code>
+          </pre>
+        </section>
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+      });
+    </script>
+  </body>
+</html>
