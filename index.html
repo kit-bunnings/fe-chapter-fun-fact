@@ -178,7 +178,7 @@
               <code data-trim data-noescape>
                 const myArray = ["hello", "world"];
                 
-                for (const (value, index) of myArray) {
+                for (const [index, value] of myArray.entries()) {
                   console.log(value, index);
                 }
               </code>
